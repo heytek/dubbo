@@ -1,5 +1,12 @@
 [![Build Status](https://travis-ci.org/alibaba/dubbo.svg?branch=master)](https://travis-ci.org/alibaba/dubbo) [![Gitter](https://badges.gitter.im/alibaba/dubbo.svg)](https://gitter.im/alibaba/dubbo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+## Fork Summary
+This repo is forked from alibaba dubbo repo. The following changes is added in:
+port mapping support
+  - dubbo server is started in an internal ip and port
+  - the external ip and port will be registered to the service registry such as zookeeper
+  - access stream will be tunelling to the internal port
+
 Dubbo is a distributed, high performance RPC framework which empowers applications with service import/export capabilities.
 
 It contains three key parts, which include:
