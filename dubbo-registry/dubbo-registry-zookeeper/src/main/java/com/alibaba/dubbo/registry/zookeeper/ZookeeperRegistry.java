@@ -29,9 +29,13 @@ import com.alibaba.dubbo.common.utils.ConcurrentHashSet;
 import com.alibaba.dubbo.common.utils.UrlUtils;
 import com.alibaba.dubbo.registry.NotifyListener;
 import com.alibaba.dubbo.registry.support.FailbackRegistry;
+import com.alibaba.dubbo.registry.zookeeper.environment.HarborCredential;
+import com.alibaba.dubbo.registry.zookeeper.environment.HarborService;
+import com.alibaba.dubbo.registry.zookeeper.environment.VcapServices;
+import com.alibaba.dubbo.registry.zookeeper.environment.VcapServicesParser;
 import com.alibaba.dubbo.remoting.zookeeper.ChildListener;
-import com.alibaba.dubbo.remoting.zookeeper.ZookeeperClient;
 import com.alibaba.dubbo.remoting.zookeeper.StateListener;
+import com.alibaba.dubbo.remoting.zookeeper.ZookeeperClient;
 import com.alibaba.dubbo.remoting.zookeeper.ZookeeperTransporter;
 import com.alibaba.dubbo.rpc.RpcException;
 
@@ -99,11 +103,11 @@ public class ZookeeperRegistry extends FailbackRegistry {
             //Read the external host and port from env if existing
             VcapServicesParser parser = new VcapServicesParser();
             VcapServices vcapServices = parser.parseServices();
-            if(vcapServiecs != null){
+            if(vcapServices != null){
                 if(vcapServices.getHarbor() != null && vcapServices.getHarbor().length >0){
                     HarborService harbor = vcapServices.getHarbor()[0];
                     HarborCredential hcred = harbor.getCredentials();
-                    if hcred!= null {
+                    if(hcred!= null) {
                         url.setHost2(hcred.getHostName());
                         url.setPort2(hcred.getPort());
                     }
