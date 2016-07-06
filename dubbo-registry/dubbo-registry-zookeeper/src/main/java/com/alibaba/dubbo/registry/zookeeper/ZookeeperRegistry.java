@@ -95,6 +95,20 @@ public class ZookeeperRegistry extends FailbackRegistry {
 
     protected void doRegister(URL url) {
         try {
+            //Changed by steven (loneghost1982@gmail.com)
+            //Read the external host and port from env if existing
+            VcapServicesParser parser = new VcapServicesParser();
+            VcapServices vcapServices = parser.parseServices();
+            if(vcapServiecs != null){
+                if(vcapServices.getHarbor() != null && vcapServices.getHarbor().length >0){
+                    HarborService harbor = vcapServices.getHarbor()[0];
+                    HarborCredential hcred = harbor.getCredentials();
+                    if hcred!= null {
+                        url.setHost2(hcred.getHostName());
+                        url.setPort2(hcred.getPort());
+                    }
+                }
+            }
         	zkClient.create(toUrlPath(url), url.getParameter(Constants.DYNAMIC_KEY, true));
         } catch (Throwable e) {
             throw new RpcException("Failed to register " + url + " to zookeeper " + getUrl() + ", cause: " + e.getMessage(), e);

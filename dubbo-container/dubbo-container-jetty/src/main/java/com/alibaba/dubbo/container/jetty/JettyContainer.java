@@ -45,7 +45,7 @@ public class JettyContainer implements Container {
 
     public static final String JETTY_PAGES = "dubbo.jetty.page";
 
-    public static final int DEFAULT_JETTY_PORT = 8080;
+    public static final int DEFAULT_JETTY_PORT = 9083;
 
     SelectChannelConnector connector;
 

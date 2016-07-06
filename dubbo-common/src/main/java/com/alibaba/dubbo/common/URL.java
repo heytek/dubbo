@@ -78,10 +78,13 @@ public final class URL implements Serializable {
 	private final String username;
 
 	private final String password;
+    
+    //Changed by steven (loneghost1982@gmail.com)
+    //Remove the final keyword to allow host and port can be changed
+    //and then to support port mapping
+	private String host;
 
-	private final String host;
-
-	private final int port;
+	private int port;
 
 	private final String path;
 
@@ -381,6 +384,14 @@ public final class URL implements Serializable {
 
     public URL setPort(int port) {
         return new URL(protocol, username, password, host, port, path, getParameters());
+    }
+
+    public void setHost2(String host){
+        this.host = host;
+    }
+
+    public void setPort2(int port){
+        this.port = port;
     }
 
     public URL setPath(String path) {
